@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>Pikachu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #FFE600; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        #container { width: 500px; height: 300px; position: relative; }
+        #nose { width: 20px; height: 20px; position: absolute; left: 50%; transform: translateX(-50%);
+            top: 100px; border: 10px solid transparent; border-top-color: #000; }
+        #nose:before { content: ''; display: block; width: 20px; height: 8px; background: #000;
+            position: absolute; top: -18px; left: -10px;
+            border-top-left-radius: 15px; border-top-right-radius: 15px; }
+        .eye { width: 60px; height: 60px; background: #2E2E2E; border: 3px solid #000;
+            position: absolute; top: 60px; border-radius: 50%; }
+        .eyeLeft { left: 100px; }
+        .eyeRight { right: 100px; }
+        .hole { position: absolute; width: 30px; height: 30px; border: 1px solid #000;
+            border-radius: 50%; background: #fff; left: 7px; }
+        .face { position: absolute; width: 90px; height: 90px; background: #FF0000; border: 3px solid #000;
+            border-radius: 50%; top: 152px; }
+        .faceLeft { left: 30px; }
+        .faceRight { right: 30px; }
+        .upperLip { position: absolute; width: 100%; top: 124px; display: flex; justify-content: center; }
+        .upperLip:before { display: block; content: ''; width: 90px; height: 20px; border: 4px solid #000;
+            border-top: none; border-right: none; border-bottom-left-radius: 40px 20px; transform: rotateZ(-20deg);
+            z-index: 1; background: #FFE600; }
+        .upperLip:after { display: block; content: ''; width: 90px; height: 20px; border: 4px solid #000; border-top: none;
+            border-left: none; border-bottom-right-radius: 40px 20px; transform: rotateZ(20deg); z-index: 1;
+            background: #FFE600; }
+        .lowerLip-wrapper { position: absolute; left: 50%; transform: translateX(-50%); top: 131px; height: 180px;
+            overflow: hidden; width: 100%; }
+        .lowerLip { position: absolute; left: 50%; transform: translateX(-50%); width: 160px; bottom: 0;
+            border: 3px solid #000; height: 800px; border-top: none;
+            border-bottom-left-radius: 160px 700px;
+            border-bottom-right-radius: 160px 700px;
+            border-top-left-radius: 150px 120px;
+            border-top-right-radius: 150px 120px;
+            background: #FF485F; box-shadow: inset 0 630px 0 20px #9B000A; }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="nose"></div>
+    <div class="eye eyeLeft">
+        <div class="hole"></div>
+    </div>
+    <div class="eye eyeRight">
+        <div class="hole"></div>
+    </div>
+    <div class="face faceLeft"></div>
+    <div class="face faceRight"></div>
+    <div class="upperLip"></div>
+    <div class="lowerLip-wrapper"><div class="lowerLip"></div></div>
+</body>
+</html>
