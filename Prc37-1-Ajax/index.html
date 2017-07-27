@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <style>
+        *{margin:0;padding:0}
+        ul,ol{list-style: none;}
+        h3{margin: 15px;}
+        form{margin-top: 15px;margin-left:15px;font-size:18px;}
+        .errorMessage{font-size:14px;color: #a13c3c;display: none; }
+        input.error{border:1px solid #a13c3c;}
+        input.error + .errorMessage{display:inline;}
+    </style>
+</head>
+<body>
+<h3>POST请求部分</h3>
+<form id="loginForm" action="/login" method="POST">
+    <div>
+        <label>姓名
+            <input name="username" type="text" >
+            <span class="errorMessage">错误提示</span>
+        </label>
+    </div>
+    <div>
+        <label>密码
+            <input name="password" type="password" >
+            <span class="errorMessage">错误提示</span>
+        </label>
+    </div>
+    <input type="submit">
+</form>
+<p style="font-size:14px;margin-left: 15px;">参考用户名：greygao;  参考密码:123456</p>
+<h3>GET请求部分</h3>
+<form action="xxx" method="GET">
+    <input name='yyy' type="text">
+    <input name='zzz' type="text">
+    <input type="submit">
+</form>
+<p style="font-size:14px;margin-left: 15px;">参考值：1;  参考值:2</p>
+</body>
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    loginForm.addEventListener('submit',function (e) {
+        e.preventDefault();
+        let username = loginForm.username.value;
+        let password = loginForm.password.value;
+        let valid = true;
+        $('input.error').removeClass('error');          //清除上一次请求的error信息
+
+        //登录信息在前端处理
+        /*
+        if($.trim(username) === ''){
+            $('input[name="username"]').addClass('error')
+                .next('.errorMessage').text('用户名不能为空');
+            valid = false;
+        }
+        if(password === ''){
+            $('input[name="password"]').addClass('error')
+                .next('.errorMessage').text('密码不能为空');
+            valid = false;
+        }
+        //检查表单，如果返回false，就不再提交ajax
+        if(valid === false){
+            return;
+        }
+        */
+
+        //构造一个Ajax请求
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+                    //提交失败
+                if (request.status >= 400) {
+                    //利用后端信息（数据结构）来提示用户错误信息
+                    let {errors} = JSON.parse(request.responseText);
+                    for (var key in errors) {
+                        let value = errors[key];
+                        //console.log(errors);
+                        //console.log(key);
+                        console.log(value);
+                        $(`input[name="${key}"]`).addClass('error')
+                            .next('.errorMessage').text(value);
+                    }
+                } else {
+                    //提交成功
+                    //location.href = '/home'
+                    alert(request.responseText);
+                    console.log('提交成功');
+                }
+            }
+        };
+        request.open('POST', loginForm.action);
+        request.send(`username=${username}&password=${password}`);
+    })
+
+</script>
+</html>
